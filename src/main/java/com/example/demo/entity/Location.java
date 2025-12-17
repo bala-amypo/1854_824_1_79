@@ -12,14 +12,14 @@ public class Location{
     private Long id;
     private String name;
     private Double latitude;
-    private Double longtude;
+    private Double longitude;
     public Long getId(){
         return id;
     }
     public void setId(Long id){
         this.id = id;
     }
-    public String getName{
+    public String getName(){
         return name;
     }
     public void setName(String name){
@@ -31,18 +31,18 @@ public class Location{
     public void setLatitude(Double latitude){
         this.latitude = latitude;
     }
-    public Double getLongtude(){
+    public Double getLongitude(){
         return longtude;
     }
-    public void setLongtude(Double longtude){
-        this.longtude = longtude;
+    public void setLongitude(Double longtude){
+        this.longtude = longitude;
     }
 
 public Location(Long id,String name,Double latitude,Doublelongtude){
 this.id=id;
 this.name=name;
 this.latitude=latitude;
-this.longtude=longtude;
+this.longtude=longitude;
 }
 
 public Location(){
