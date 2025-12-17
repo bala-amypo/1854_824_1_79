@@ -38,7 +38,7 @@ public class Location{
         this.longtude = longitude;
     }
 
-public Location(Long id,String name,Double latitude,Doublelongtude){
+public Location(Long id,String name,Double latitude,Double longtude){
 this.id=id;
 this.name=name;
 this.latitude=latitude;
