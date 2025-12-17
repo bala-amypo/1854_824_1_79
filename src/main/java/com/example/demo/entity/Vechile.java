@@ -1,3 +1,3 @@
-public class Vechicle{
+public class Vechile{
     
 }

@@ -32,17 +32,17 @@ public class Location{
         this.latitude = latitude;
     }
     public Double getLongitude(){
-        return longtude;
+        return longitude;
     }
-    public void setLongitude(Double longtude){
-        this.longtude = longitude;
+    public void setLongitude(Double longitude){
+        this.longitude = longitude;
     }
 
-public Location(Long id,String name,Double latitude,Double longtude){
+public Location(Long id,String name,Double latitude,Double longitude){
 this.id=id;
 this.name=name;
 this.latitude=latitude;
-this.longtude=longitude;
+this.longitude=longitude;
 }
 
 public Location(){
