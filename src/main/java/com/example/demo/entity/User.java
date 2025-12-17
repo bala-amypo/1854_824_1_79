@@ -37,5 +37,15 @@ public class User{
     public String getPassword(){
         return password;
     }
-    public 
+    public void setPassword(string password){
+        this.password = password;
+    }
+    public String getRole(){
+        return role;
+    }
+    public void setRole(String role){
+        this.role = role;
+    }
+
+    public User(Long id, String name,)
 }
