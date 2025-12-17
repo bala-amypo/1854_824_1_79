@@ -28,7 +28,15 @@ public class Location{
     public Double getLatitude(){
         return latitude;
     }
-    public void setLatitude(Double latitude)
+    public void setLatitude(Double latitude){
+        this.latitude = latitude;
+    }
+    public Double getLongtude(){
+        return longtude;
+    }
+    public void setLongtude(Double longtude){
+        this.longtude = longtude;
+    }
 
 public Location(Long id,String name,Double latitude,Doublelongtude){
 this.id=id;
