@@ -11,12 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 @Entity
-@Table(
-    name = "vehicle",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "vehicleNumber")
-    }
-)
 public class Vehicle {
 
     @Id
