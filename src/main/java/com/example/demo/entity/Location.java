@@ -19,11 +19,25 @@ public class Location{
     public void setId(Long id){
         this.id = id;
     }
+    public String getName{
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public Double getLatitude(){
+        return latitude;
+    }
+    public void setLatitude(Double latitude)
 
 public Location(Long id,String name,Double latitude,Doublelongtude){
 this.id=id;
-this.
+this.name=name;
+this.latitude=latitude;
+this.longtude=longtude;
+}
 
+public Location(){
 
 }
 
