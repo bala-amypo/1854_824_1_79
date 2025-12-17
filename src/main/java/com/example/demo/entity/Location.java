@@ -9,5 +9,22 @@ import jakarta.persistence.Id;
 public class Location{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private
+    private Long id;
+    private String name;
+    private Double latitude;
+    private Double longtude;
+    public Long getId(){
+        return id;
+    }
+    public void setId(Long id){
+        this.id = id;
+    }
+
+public Location(Long id,String name,Double latitude,Doublelongtude){
+this.id=id;
+this.
+
+
+}
+
 }
