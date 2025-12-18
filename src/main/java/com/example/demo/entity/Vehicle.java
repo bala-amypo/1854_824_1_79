@@ -31,51 +31,42 @@ public class Vehicle {
     private Double fuelEfficiency; // km per liter
 
     
-    public Vehicle() {}
-
+    public Vehicle() {
+        
+    }
     public Vehicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency) {
         this.user = user;
         this.vehicleNumber = vehicleNumber;
         setCapacityKg(capacityKg); // validation
         this.fuelEfficiency = fuelEfficiency;
     }
-
-    
     public Long getId() {
         return id;
     }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public String getVehicleNumber() {
         return vehicleNumber;
     }
-
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
-
     public Double getCapacityKg() {
         return capacityKg;
     }
-
     public void setCapacityKg(Double capacityKg) {
         if (capacityKg <= 0) {
             throw new IllegalArgumentException("Capacity must be greater than zero");
         }
         this.capacityKg = capacityKg;
     }
-
     public Double getFuelEfficiency() {
         return fuelEfficiency;
     }
-
     public void setFuelEfficiency(Double fuelEfficiency) {
         this.fuelEfficiency = fuelEfficiency;
     }
