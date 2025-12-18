@@ -1,20 +1,20 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.Vehicle;
-import com.example.demo.repository.VehicleRepository;
-import com.example.demo.service.VehicleService;
+import com.example.demo.entity.Vechicle;
+import com.example.demo.repository.VechicleRepository;
+import com.example.demo.service.VechicleService;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class VehicleImpl implements VehicleService {
+public class VechicleImpl implements VechicleService {
 
-    private final VehicleRepository vehicleRepository;
+    private final VechicleRepository vechicleRepository;
 
-    public VehicleImpl(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+    public VechicleImpl(VehicleRepository vechicleRepository) {
+        this.vehicleRepository = vechicleRepository;
     }
 
     @Override
