@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Vehicle;
@@ -19,10 +18,5 @@ public class VehicleImpl implements VehicleService {
     @Override
     public Vehicle saveVehicle(Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
-    }
-
-    @Override
-    public List<Vehicle> getVehiclesByUserId(Long userId) {
-        return vehicleRepository.findAll(); // temporary
     }
 }

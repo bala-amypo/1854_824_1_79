@@ -17,6 +17,11 @@ public class ShipmentImpl implements ShipmentService {
     }
 
     @Override
+    public Shipment createShipment(Shipment shipment) {
+        return shipmentRepository.save(shipment);
+    }
+
+    @Override
     public List<Shipment> getShipmentsByVehicleId(Long vehicleId) {
         return shipmentRepository.findByVehicleId(vehicleId);
     }

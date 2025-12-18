@@ -63,8 +63,8 @@ public class Vehicle {
         this.vehicleType = vehicleType;
     }
 
-    public Double getCapacity() {
-        return capacity;
+    public Double getCapacityKg() {
+        return capacityKg;
     }
 
     public void setCapacity(Double capacity) {
