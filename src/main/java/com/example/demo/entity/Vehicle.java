@@ -1,67 +1,81 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
 
 @Entity
-public class Vechicle {
+@Table(name = "vehicle")
+public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-    @Column(nullable = false, unique = true)
-    private String vechicleNumber;
-    @Column(nullable = false)
-    private Double capacityKg;
-    @Column(nullable = false)
-    private Double fuelEfficiency; // km per liter
-    public Vechicle() {
 
+    @Column(name = "vehicle_number", nullable = false, unique = true)
+    private String vehicleNumber;
+
+    @Column(name = "vehicle_type")
+    private String vehicleType;
+
+    @Column(name = "capacity")
+    private Double capacity;
+
+    @Column(name = "status")
+    private String status;
+
+    // ---- Constructors ----
+    public Vehicle() {
     }
-    public Vechicle(User user, String vechicleNumber, Double capacityKg, Double fuelEfficiency) {
-        this.user = user;
-        this.vechicleNumber = vechicleNumber;
-        setCapacityKg(capacityKg); // validation
-        this.fuelEfficiency = fuelEfficiency;
+
+    public Vehicle(String vehicleNumber, String vehicleType, Double capacity, String status) {
+        this.vehicleNumber = vehicleNumber;
+        this.vehicleType = vehicleType;
+        this.capacity = capacity;
+        this.status = status;
     }
+
+    // ---- Getters & Setters ----
     public Long getId() {
         return id;
     }
-    public User getUser() {
-        return user;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public void setUser(User user) {
-        this.user = user;
+
+    public String getVehicleNumber() {
+        return vehicleNumber;
     }
-    public String getVechicleNumber() {
-        return vechicleNumber;
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
     }
-    public void setVechicleNumber(String vechicleNumber) {
-        this.vechicleNumber = vechicleNumber;
+
+    public String getVehicleType() {
+        return vehicleType;
     }
-    public Double getCapacityKg() {
-        return capacityKg;
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
-    public void setCapacityKg(Double capacityKg) {
-        if (capacityKg <= 0) {
-            throw new IllegalArgumentException("Capacity must be greater than zero");
-        }
-        this.capacityKg = capacityKg;
+
+    public Double getCapacity() {
+        return capacity;
     }
-    public Double getFuelEfficiency() {
-        return fuelEfficiency;
+
+    public void setCapacity(Double capacity) {
+        this.capacity = capacity;
     }
-    public void setFuelEfficiency(Double fuelEfficiency) {
-        this.fuelEfficiency = fuelEfficiency;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
