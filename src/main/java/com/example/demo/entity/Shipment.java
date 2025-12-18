@@ -37,7 +37,6 @@ public class Shipment {
     @Column(nullable = false)
     private LocalDate scheduledDate;
 
-    // Constructors
     public Shipment() {}
 
     public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,
