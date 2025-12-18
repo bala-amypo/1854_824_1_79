@@ -10,19 +10,19 @@ import com.example.demo.service.ShipmentService;
 @Service
 public class ShipmentImpl implements ShipmentService {
 
-    private final ShipmentRepository shipmentRepository;
+    private final ShipmentRepository repository;
 
-    public ShipmentImpl(ShipmentRepository shipmentRepository) {
-        this.shipmentRepository = shipmentRepository;
+    public ShipmentImpl(ShipmentRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Shipment createShipment(Shipment shipment) {
-        return shipmentRepository.save(shipment);
+        return repository.save(shipment);
     }
 
     @Override
-    public List<Shipment> getShipmentsByVehicleId(Long vehicleId) {
-        return shipmentRepository.findByVehicleId(vehicleId);
+    public List<Shipment> getShipmentsbyVechicleId(Long vehicleId) {
+        return repository.findByVehicleId(vehicleId);
     }
 }

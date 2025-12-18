@@ -1,22 +1,14 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service;
 import com.example.demo.entity.RouteOptimizationResult;
 import com.example.demo.service.RouteOptimizationResultService;
 
-import org.springframework.stereotype.Service;
-
 @Service
-public class RouteOptimizationResultImpl
-        implements RouteOptimizationResultService {
-
-    private final RouteOptimizationResultRepository repository;
-
-    public RouteOptimizationResultImpl(RouteOptimizationResultRepository repository) {
-        this.repository = repository;
-    }
+public class RouteOptimizationResultImpl implements RouteOptimizationResultService {
 
     @Override
-    public RouteOptimizationResult saveResult(RouteOptimizationResult result) {
-        return repository.save(result);
+    public RouteOptimizationResult saveresult(RouteOptimizationResult result) {
+        return result;
     }
 }
