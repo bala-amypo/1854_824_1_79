@@ -4,7 +4,12 @@ public class Locationimpl implements LocationServices{
     @Autowired
     LocationRepository lrp;
     public Location  createLocation (Location location){
+        if(location.getLatitude()>90){
+            throw new IllegalArgumentException("latitude");
+        }
         return lrp.save(user);
     }
-    public <
+    public List<Location> getAllLocation(){
+        return lrp.findAll();
+    }
 }
