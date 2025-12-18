@@ -1,6 +1,7 @@
 package.com.example.demo.repository;
 
-import or.springframework.data.jpa.
+import org.springframework.data.jpa.repository.JpaRepository;
+
 public class LocationRepository{
     
 }
