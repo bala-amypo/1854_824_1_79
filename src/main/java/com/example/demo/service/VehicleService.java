@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface VehicleService{
     Vehicle saveVechicle(Vehicle vehicle);
-    List<Vehicle> getVehicleByUserId(Long userId);
+    List<Vehicle> getVehiclesByUserId(Long userId);
 }

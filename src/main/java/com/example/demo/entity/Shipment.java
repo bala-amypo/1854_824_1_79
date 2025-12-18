@@ -1,11 +1,7 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import java.time.LocalDate;
+import jakarta.persistence.*;
 
 @Entity
 public class Shipment {
@@ -14,28 +10,23 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String source;
-    private String destination;
     private Double weightKg;
+
+    private LocalDate scheduledDate;
 
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    // getters & setters
     public Vehicle getVehicle() {
         return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 
     public Double getWeightKg() {
         return weightKg;
     }
 
-    public void setWeightKg(Double weightKg) {
-        this.weightKg = weightKg;
+    public LocalDate getScheduledDate() {
+        return scheduledDate;
     }
 }

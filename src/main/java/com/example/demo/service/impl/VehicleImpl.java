@@ -1,12 +1,11 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.Vehicle;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
-
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class VehicleImpl implements VehicleService {
@@ -24,6 +23,6 @@ public class VehicleImpl implements VehicleService {
 
     @Override
     public List<Vehicle> getVehiclesByUserId(Long userId) {
-        return vehicleRepository.findByUserId(userId);
+        return vehicleRepository.findAll(); // temporary
     }
 }
