@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ShipmentService{
     Shipment createShipment(Shipment shipment);
-    List<shipment> getShipmentsbyVechicleId(Long vechicleId);
+    List<Shipment> getShipmentsbyVechicleId(Long vechicleId);
 }

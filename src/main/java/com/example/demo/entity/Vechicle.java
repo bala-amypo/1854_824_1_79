@@ -20,7 +20,7 @@ public class Vechicle {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Column(nullable = false, unique = true)
-    private String vehicleNumber;
+    private String vechicleNumber;
     @Column(nullable = false)
     private Double capacityKg;
     @Column(nullable = false)
@@ -28,9 +28,9 @@ public class Vechicle {
     public Vechicle() {
 
     }
-    public Vechicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency) {
+    public Vechicle(User user, String vechicleNumber, Double capacityKg, Double fuelEfficiency) {
         this.user = user;
-        this.vehicleNumber = vehicleNumber;
+        this.vechicleNumber = vechicleNumber;
         setCapacityKg(capacityKg); // validation
         this.fuelEfficiency = fuelEfficiency;
     }
@@ -46,7 +46,7 @@ public class Vechicle {
     public String getVechicleNumber() {
         return vechicleNumber;
     }
-    public void setVechicleNumber(String vehicleNumber) {
+    public void setVechicleNumber(String vechicleNumber) {
         this.vechicleNumber = vechicleNumber;
     }
     public Double getCapacityKg() {
