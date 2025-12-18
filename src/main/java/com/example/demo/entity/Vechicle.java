@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 @Entity
-public class Vehicle {
+public class Vechicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class Vehicle {
     private Double capacityKg;
     @Column(nullable = false)
     private Double fuelEfficiency; // km per liter
-    public Vehicle() {
+    public Vechicle() {
 
     }
-    public Vehicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency) {
+    public Vechicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency) {
         this.user = user;
         this.vehicleNumber = vehicleNumber;
         setCapacityKg(capacityKg); // validation
@@ -43,11 +43,11 @@ public class Vehicle {
     public void setUser(User user) {
         this.user = user;
     }
-    public String getVehicleNumber() {
-        return vehicleNumber;
+    public String getVechicleNumber() {
+        return vechicleNumber;
     }
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
+    public void setVechicleNumber(String vehicleNumber) {
+        this.vechicleNumber = vechicleNumber;
     }
     public Double getCapacityKg() {
         return capacityKg;
