@@ -54,11 +54,11 @@ public class Shipment {
     }
 
     public Vechicle getVechicle() {
-        return vehicle;
+        return vechicle;
     }
 
     public void setVehicle(Vechicle vechicle) {
-        this.vehicle = vehicle;
+        this.vehcicle = vechicle;
     }
 
     public Location getPickupLocation() {
@@ -82,7 +82,7 @@ public class Shipment {
     }
 
     public void setWeightKg(Double weightKg) {
-        if (vehicle != null && weightKg > vehicle.getCapacityKg()) {
+        if (vechicle != null && weightKg > vechicle.getCapacityKg()) {
             throw new IllegalArgumentException("Weight exceeds vehicle capacity");
         }
         this.weightKg = weightKg;

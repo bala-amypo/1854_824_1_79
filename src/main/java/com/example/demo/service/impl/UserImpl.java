@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BcryptPasswordEncoder;
 @Service
 public class UserImpl implements UserService{
     private final UserRepository userRepository;
-    private final BcryptPasswordEncoder passwordEncoder = new BcryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserImpl(UserRepository userRepository){
         this.userRepository = userRepository;
