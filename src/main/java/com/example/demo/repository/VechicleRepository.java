@@ -2,10 +2,10 @@ package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.Vechicle;
+import com.example.demo.entity.Vehicle;
 
 import java.util.List;
 
-public interface VechicleRepository extends JpaRepository<Vechicle, Long>{
-    List<Vechicle> findByUserId(Long userId);
+public interface VehicleRepository extends JpaRepository<Vechicle, Long>{
+    List<Vehicle> findByUserId(Long userId);
 }
