@@ -3,5 +3,8 @@ import com.example.demo.repository.LocationRepository;
 public class Locationimpl implements LocationServices{
     @Autowired
     LocationRepository lrp;
-    public Location  create
+    public Location  createLocation (Location location){
+        return lrp.save(user);
+    }
+    public <
 }
