@@ -58,7 +58,7 @@ public class Shipment {
     }
 
     public void setVehicle(Vechicle vechicle) {
-        this.vehcicle = vechicle;
+        this.vechicle = vechicle;
     }
 
     public Location getPickupLocation() {
