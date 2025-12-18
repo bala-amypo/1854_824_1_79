@@ -21,6 +21,6 @@ public class RouteOptimizationResultController {
     @PostMapping
     public RouteOptimizationResult saveResult(
             @RequestBody RouteOptimizationResult result) {
-        return service.saveResult(result);
+        return service.saveresult(result);
     }
 }
