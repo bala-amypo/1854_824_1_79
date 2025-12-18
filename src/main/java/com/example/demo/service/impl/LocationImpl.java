@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 import com.example.demo.repository.LocationRepository;
-public class Locationimpl implements LocationServices{
+public class LocationImpl implements LocationServices{
     @Autowired
     LocationRepository lrp;
     public Location  createLocation (Location location){
