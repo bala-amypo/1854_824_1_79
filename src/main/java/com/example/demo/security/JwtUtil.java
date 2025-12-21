@@ -1,7 +1,16 @@
+package com.example.demo.security;
+
+import com.example.demo.entity.User;
+import io.jsonwebtoken.*;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
 @Component
 public class JwtUtil {
 
-    private final String secret = "secret";
+    private final String SECRET_KEY = "mysecretkey";
+    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 1 day
 
     public String generateToken(User user) {
         return Jwts.builder()
@@ -9,8 +18,30 @@ public class JwtUtil {
                 .claim("userId", user.getId())
                 .claim("role", user.getRole())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .setExpiration(
+                        new Date(System.currentTimeMillis() + EXPIRATION_TIME)
+                )
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            getClaims(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
