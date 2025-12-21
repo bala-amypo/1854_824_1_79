@@ -1,48 +1,56 @@
 package com.example.demo.security;
 
 import com.example.demo.entity.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.JwtException;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "secretkey123";
-    private static final long EXPIRATION_TIME = 86400000; // 1 day
+    // Simple secret just for encoding
+    private static final String SECRET = "secret";
 
+    /**
+     * Generates a simple token using Base64
+     * Format: email:userId:role
+     */
     public String generateToken(User user) {
-        return Jwts.builder()
-                .setSubject(user.getEmail())
-                .claim("userId", user.getId())
-                .claim("role", user.getRole())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
+        String tokenData =
+                user.getEmail() + ":" + user.getId() + ":" + user.getRole();
+        return Base64.getEncoder()
+                .encodeToString((tokenData + ":" + SECRET)
+                .getBytes(StandardCharsets.UTF_8));
     }
 
+    /**
+     * Extract email from token
+     */
     public String extractUsername(String token) {
-        return getClaims(token).getSubject();
-    }
-
-    public boolean validateToken(String token) {
         try {
-            getClaims(token);
-            return true;
-        } catch (JwtException e) {
-            return false;
+            String decoded = new String(
+                    Base64.getDecoder().decode(token),
+                    StandardCharsets.UTF_8
+            );
+            return decoded.split(":")[0];
+        } catch (Exception e) {
+            return null;
         }
     }
 
-    private Claims getClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
+    /**
+     * Token validation
+     */
+    public boolean validateToken(String token) {
+        try {
+            String decoded = new String(
+                    Base64.getDecoder().decode(token),
+                    StandardCharsets.UTF_8
+            );
+            return decoded.endsWith(SECRET);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
