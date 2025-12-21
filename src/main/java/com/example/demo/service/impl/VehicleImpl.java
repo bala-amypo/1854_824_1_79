@@ -9,6 +9,7 @@ import com.example.demo.service.VehicleService;
 public class VehicleImpl implements VehicleService {
 
     private final VehicleRepository repository;
+    private final 
 
     public VehicleImpl(VehicleRepository repository) {
         this.repository = repository;
