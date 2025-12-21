@@ -21,7 +21,11 @@ public class VehicleImpl implements VehicleService {
         if(vehicle.getCapacity()==null||vehicle.getCapacity()<=0){
             throw new IllegalArgumentException("capacity");
         }
-        User user=user
-        return repository.save(vehicle);
+        User user=userRepository.findById(1L)
+        .orElseThrow(()->new RuntimeException("User not found"));
+
+        vehicle.setUser(user);
+
+        return vehicleRepository.save(vehicle);
     }
 }
