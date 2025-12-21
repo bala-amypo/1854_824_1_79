@@ -8,11 +8,12 @@ import com.example.demo.service.VehicleService;
 @Service
 public class VehicleImpl implements VehicleService {
 
-    private final VehicleRepository repository;
-    private final 
+    private final VehicleRepository vechicleRepository;
+    private final UserRepository userRepository;
 
-    public VehicleImpl(VehicleRepository repository) {
-        this.repository = repository;
+    public VehicleImpl(VehicleRepository repository, UserRepository userRepository) {
+        this.vechiRepository = vechicleRepository;
+        this.userRepository=userRepository
     }
 
     @Override
