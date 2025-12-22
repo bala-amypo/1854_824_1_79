@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.RouteOptimizationResult;
+import com.example.demo.entiry.RouteOptimizationResult;
 import com.example.demo.repository.RouteOptimizationResultRepository;
 import com.example.demo.service.RouteOptimizationResultService;
 

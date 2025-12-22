@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Vehicle;
+import com.example.demo.entity.Vehicle;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
 
