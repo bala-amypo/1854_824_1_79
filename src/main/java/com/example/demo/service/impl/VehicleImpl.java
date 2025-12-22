@@ -27,7 +27,6 @@ public class VehicleImpl implements VehicleService {
             throw new IllegalArgumentException("capacity");
         }
 
-        // attach default user (exam-safe)
         User user = userRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
