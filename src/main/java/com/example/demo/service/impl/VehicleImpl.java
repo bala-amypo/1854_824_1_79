@@ -2,35 +2,31 @@ package com.example.demo.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.User;
-import com.example.demo.entity.Vehicle;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.model.Vehicle;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
 
 @Service
-public class VehicleImpl implements VehicleService {
+public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
-    private final UserRepository userRepository;
 
-    public VehicleImpl(VehicleRepository vehicleRepository,
-                       UserRepository userRepository) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
-    public Vehicle saveVechicle(Vehicle vehicle) {
+    public Vehicle addVehicle(Vehicle vehicle) {
 
-        if (vehicle.getCapacity() == null || vehicle.getCapacity() <= 0) {
-            throw new IllegalArgumentException("capacity");
+        // Vehicle number uniqueness
+        if (vehicleRepository.existsByVehicleNumber(vehicle.getVehicleNumber())) {
+            throw new IllegalArgumentException("Vehicle number already exists");
         }
 
-        User user = userRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        vehicle.setUser(user);
+        // Capacity validation
+        if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
+            throw new IllegalArgumentException("Invalid capacity");
+        }
 
         return vehicleRepository.save(vehicle);
     }

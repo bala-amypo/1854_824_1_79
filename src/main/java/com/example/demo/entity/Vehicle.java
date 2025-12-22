@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,70 +7,67 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "vehicles")
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String vehicleNumber;
-
-    private String vehicleType;
-
-    private Double capacity;
-
-    private String status;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // ===== GETTERS =====
+    @Column(unique = true, nullable = false)
+    private String vehicleNumber;
+
+    private Double capacityKg;
+
+    private Double fuelEfficiency; // km per liter
+
+    public Vehicle() {
+    }
+
     public Long getId() {
         return id;
     }
 
-    public String getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public Double getCapacity() {
-        return capacity;
-    }
-
-    public String getStatus() {
-        return status;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUser() {
         return user;
     }
 
-    // ===== SETTERS =====
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void setCapacity(Double capacity) {
-        this.capacity = capacity;
+    public String getVehicleNumber() {
+        return vehicleNumber;
     }
 
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
+    public Double getCapacityKg() {
+        return capacityKg;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCapacityKg(Double capacityKg) {
+        this.capacityKg = capacityKg;
+    }
+
+    public Double getFuelEfficiency() {
+        return fuelEfficiency;
+    }
+
+    public void setFuelEfficiency(Double fuelEfficiency) {
+        this.fuelEfficiency = fuelEfficiency;
     }
 }

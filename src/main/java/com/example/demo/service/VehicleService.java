@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Vehicle;
+import com.example.demo.model.Vehicle;
 
+public interface VehicleService {
 
-public interface VehicleService{
-    Vehicle saveVechicle(Vehicle vehicle);
+    Vehicle addVehicle(Vehicle vehicle);
 }
