@@ -13,6 +13,10 @@ public class Location{
     private String name;
     private Double latitude;
     private Double longitude;
+    public Location(){
+
+}
+
     public Long getId(){
         return id;
     }
@@ -38,15 +42,7 @@ public class Location{
         this.longitude = longitude;
     }
 
-public Location(Long id,String name,Double latitude,Double longitude){
-this.id=id;
-this.name=name;
-this.latitude=latitude;
-this.longitude=longitude;
-}
 
-public Location(){
 
-}
 
 }
