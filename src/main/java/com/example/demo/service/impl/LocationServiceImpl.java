@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Service
-public class LocationImpl implements LocationService {
+public class LocationServiceImpl implements LocationService {
 
     @Autowired
     private LocationRepository locationRepository;
