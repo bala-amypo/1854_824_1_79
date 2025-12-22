@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
@@ -46,3 +46,29 @@ public class RouteOptimizationResult {
     public void setShipment(Shipment shipment) {
         this.shipment = shipment;
     }
+
+    public Double getOptimizedDistanceKm() {
+        return optimizedDistanceKm;
+    }
+
+    public void setOptimizedDistanceKm(Double optimizedDistanceKm) {
+        this.optimizedDistanceKm = optimizedDistanceKm;
+    }
+
+    public Double getEstimatedFuelUsageL() {
+        return estimatedFuelUsageL;
+    }
+
+    public void setEstimatedFuelUsageL(Double estimatedFuelUsageL) {
+        this.estimatedFuelUsageL = estimatedFuelUsageL;
+    }
+
+    public LocalDateTime getGeneratedAt() {
+        return generatedAt;
+    }
+
+    public void setGeneratedAt(LocalDateTime generatedAt) {
+        this.generatedAt = generatedAt;
+    }
+
+}
