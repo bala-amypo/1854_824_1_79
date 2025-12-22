@@ -1,28 +1,47 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.Shipment;
 import com.example.demo.repository.ShipmentRepository;
 import com.example.demo.service.ShipmentService;
 
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
-public class ShipmentImpl implements ShipmentService {
+public class ShipmentServiceImpl implements ShipmentService {
 
-    private final ShipmentRepository repository;
+    private final ShipmentRepository shipmentRepository;
 
-    public ShipmentImpl(ShipmentRepository repository) {
-        this.repository = repository;
+    public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
+        this.shipmentRepository = shipmentRepository;
     }
 
     @Override
     public Shipment createShipment(Shipment shipment) {
-        return repository.save(shipment);
+
+        // ✅ Rule 1: Weight validation
+        if (shipment.getWeightKg() > shipment.getVehicle().getCapacityKg()) {
+            throw new IllegalArgumentException("exceeds vehicle capacity");
+        }
+
+        // ✅ Rule 2: Date validation
+        if (shipment.getScheduledDate().isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("scheduled date is in the past");
+        }
+
+        return shipmentRepository.save(shipment);
     }
 
     @Override
-    public List<Shipment> getShipmentsbyVechicleId(Long vehicleId) {
-        return repository.findByVehicleId(vehicleId);
+    public Shipment getShipmentById(Long id) {
+        return shipmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Shipment not found"));
+    }
+
+    @Override
+    public List<Shipment> getAllShipments() {
+        return shipmentRepository.findAll();
     }
 }
