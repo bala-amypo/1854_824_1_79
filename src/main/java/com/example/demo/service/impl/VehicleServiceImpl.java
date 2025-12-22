@@ -1,33 +1,23 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.Vehicle;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private final VehicleRepository vehicleRepository;
+    private final VehicleRepository repository;
 
-    public VehicleServiceImpl(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+    public VehicleServiceImpl(VehicleRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public Vehicle addVehicle(Vehicle vehicle) {
-
-        // Vehicle number uniqueness
-        if (vehicleRepository.existsByVehicleNumber(vehicle.getVehicleNumber())) {
-            throw new IllegalArgumentException("Vehicle number already exists");
-        }
-
-        // Capacity validation
-        if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
-            throw new IllegalArgumentException("Invalid capacity");
-        }
-
-        return vehicleRepository.save(vehicle);
+    public List<Vehicle> getAllVehicles() {
+        return repository.findAll();
     }
 }
