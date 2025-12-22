@@ -1,26 +1,33 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.RouteOptimizationResult;
-import com.example.demo.service.RouteOptimizationResultService;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.RouteOptimizationResult;
+import com.example.demo.service.RouteOptimizationResultService;
 
 @RestController
-@RequestMapping("/route-results")
+@RequestMapping("/api/route-results")
 public class RouteOptimizationResultController {
 
     private final RouteOptimizationResultService service;
 
-    public RouteOptimizationResultController(RouteOptimizationResultService service) {
+    public RouteOptimizationResultController(
+            RouteOptimizationResultService service) {
         this.service = service;
     }
 
     @PostMapping
-    public RouteOptimizationResult saveResult(
+    public ResponseEntity<RouteOptimizationResult> createResult(
             @RequestBody RouteOptimizationResult result) {
-        return service.saveresult(result);
+
+        RouteOptimizationResult saved =
+                service.saveResult(result);
+
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 }

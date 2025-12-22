@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.RouteOptimizationResult;
+import com.example.demo.model.RouteOptimizationResult;
 
-public interface RouteOptimizationResultService{
-    RouteOptimizationResult saveresult(RouteOptimizationResult result);
+public interface RouteOptimizationResultService {
+
+    RouteOptimizationResult saveResult(RouteOptimizationResult result);
 }
