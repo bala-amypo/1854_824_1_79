@@ -1,22 +1,29 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.Location;
 import com.example.demo.repository.LocationRepository;
 import com.example.demo.service.LocationService;
 
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    @Autowired
-    private LocationRepository locationRepository;
+    private final LocationRepository locationRepository;
+
+    public LocationServiceImpl(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
 
     @Override
-    public Location saveLocation(Location location) {
+    public Location createLocation(Location location) {
+
+        if (location.getLatitude() > 90 || location.getLatitude() < -90) {
+            throw new IllegalArgumentException("latitude is invalid");
+        }
+
         return locationRepository.save(location);
     }
 
