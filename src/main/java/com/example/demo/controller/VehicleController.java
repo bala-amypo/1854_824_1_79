@@ -1,17 +1,14 @@
 package com.example.demo.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Vehicle;
 import com.example.demo.service.VehicleService;
 
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/vehicles")
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -20,9 +17,14 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping
-    public ResponseEntity<Vehicle> addVehicle(@RequestBody Vehicle vehicle) {
-        Vehicle savedVehicle = vehicleService.addVehicle(vehicle);
-        return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
+    @PostMapping("/{userId}")
+    public Vehicle addVehicle(@PathVariable Long userId,
+                              @RequestBody Vehicle vehicle) {
+        return vehicleService.addVehicle(userId, vehicle);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Vehicle> getVehiclesByUser(@PathVariable Long userId) {
+        return vehicleService.getVehiclesByUser(userId);
     }
 }
