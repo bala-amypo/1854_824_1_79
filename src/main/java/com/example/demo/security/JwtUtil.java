@@ -1,40 +1,28 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.Date;
+import java.util.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
 
-    private final String secretKey;
-    private final long expirationMillis;
+    private final String secret;
+    private final long expiration;
 
-    public JwtUtil(@Value("${jwt.secret}") String secretKey,
-                   @Value("${jwt.expiration}") long expirationMillis) {
-        this.secretKey = secretKey;
-        this.expirationMillis = expirationMillis;
+    public JwtUtil(@Value("${jwt.secret}") String secret,
+                   @Value("${jwt.expiration}") long expiration) {
+        this.secret = secret;
+        this.expiration = expiration;
     }
 
     public String generateToken(Long userId, String email, String role) {
-
-        return Jwts.builder()
-                .setSubject(email)
-                .claim("userId", userId)
-                .claim("role", role)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact();
+        String tokenData = userId + ":" + email + ":" + role;
+        return Base64.getEncoder().encodeToString(tokenData.getBytes());
     }
 
-    public Claims validateToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .getBody();
+    public String validateToken(String token) {
+        byte[] decoded = Base64.getDecoder().decode(token);
+        return new String(decoded);
     }
 }

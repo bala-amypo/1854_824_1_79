@@ -1,6 +1,5 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,16 +25,16 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String authHeader = request.getHeader("Authorization");
+        String header = request.getHeader("Authorization");
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        if (header != null && header.startsWith("Bearer ")) {
+            String token = header.substring(7);
 
-            String token = authHeader.substring(7);
-            Claims claims = jwtUtil.validateToken(token);
+            String userData = jwtUtil.validateToken(token);
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
-                            claims.getSubject(),
+                            userData,
                             null,
                             Collections.emptyList());
 
