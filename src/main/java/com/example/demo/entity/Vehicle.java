@@ -28,58 +28,22 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(Long id, User user, String vehicleNumber,
-                   Double capacityKg, Double fuelEfficiency) {
+    /* ===== GETTERS / SETTERS (TEST REQUIRED) ===== */
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {   // REQUIRED BY TESTS
         this.id = id;
-        this.user = user;
+    }
+
+    public String getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) { // REQUIRED
         this.vehicleNumber = vehicleNumber;
-        this.capacityKg = capacityKg;
-        this.fuelEfficiency = fuelEfficiency;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-        private Long id;
-        private User user;
-        private String vehicleNumber;
-        private Double capacityKg;
-        private Double fuelEfficiency;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder user(User user) {
-            this.user = user;
-            return this;
-        }
-
-        public Builder vehicleNumber(String vehicleNumber) {
-            this.vehicleNumber = vehicleNumber;
-            return this;
-        }
-
-        public Builder capacityKg(Double capacityKg) {
-            this.capacityKg = capacityKg;
-            return this;
-        }
-
-        public Builder fuelEfficiency(Double fuelEfficiency) {
-            this.fuelEfficiency = fuelEfficiency;
-            return this;
-        }
-
-        public Vehicle build() {
-            return new Vehicle(id, user, vehicleNumber, capacityKg, fuelEfficiency);
-        }
-    }
-
-    public Double getCapacityKg() {
-        return capacityKg;
     }
 
     public Double getFuelEfficiency() {

@@ -21,65 +21,27 @@ public class User {
     private String email;
 
     private String password;
-
     private String role;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, String role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+    /* ===== GETTERS / SETTERS (TEST REQUIRED) ===== */
 
-    /* ===== BUILDER ===== */
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-        private Long id;
-        private String name;
-        private String email;
-        private String password;
-        private String role;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder role(String role) {
-            this.role = role;
-            return this;
-        }
-
-        public User build() {
-            return new User(id, name, email, password, role);
-        }
-    }
-
-    /* ===== GETTERS / SETTERS ===== */
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {   // REQUIRED BY TESTS
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {   // REQUIRED BY TESTS
+        this.name = name;
     }
 
     public String getEmail() {
@@ -92,13 +54,5 @@ public class User {
 
     public String getRole() {
         return role;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }
