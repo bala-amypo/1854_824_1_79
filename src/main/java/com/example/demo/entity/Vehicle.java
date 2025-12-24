@@ -28,29 +28,47 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    /* ===== GETTERS / SETTERS (TEST REQUIRED) ===== */
+    /* ===== GETTERS ===== */
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {   // REQUIRED BY TESTS
-        this.id = id;
+    public User getUser() {
+        return user;
     }
 
     public String getVehicleNumber() {
         return vehicleNumber;
     }
 
-    public void setVehicleNumber(String vehicleNumber) { // REQUIRED
-        this.vehicleNumber = vehicleNumber;
+    public Double getCapacityKg() {
+        return capacityKg;
     }
 
     public Double getFuelEfficiency() {
         return fuelEfficiency;
     }
 
-    public void setUser(User user) {
+    /* ===== SETTERS (REQUIRED) ===== */
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {   // 🔥 FIX FOR ERROR
         this.user = user;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public void setCapacityKg(Double capacityKg) {
+        this.capacityKg = capacityKg;
+    }
+
+    public void setFuelEfficiency(Double fuelEfficiency) {
+        this.fuelEfficiency = fuelEfficiency;
     }
 }

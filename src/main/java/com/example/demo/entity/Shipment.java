@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "shipments")
@@ -24,6 +25,9 @@ public class Shipment {
     @ManyToOne
     private Location dropLocation;
 
+    private Double weightKg;
+    private LocalDate scheduledDate;
+
     public Shipment() {
     }
 
@@ -31,8 +35,12 @@ public class Shipment {
         return id;
     }
 
-    public void setId(Long id) {   // REQUIRED BY TESTS
-        this.id = id;
+    public Double getWeightKg() {   // REQUIRED
+        return weightKg;
+    }
+
+    public LocalDate getScheduledDate() { // REQUIRED
+        return scheduledDate;
     }
 
     public Vehicle getVehicle() {
@@ -45,5 +53,17 @@ public class Shipment {
 
     public Location getDropLocation() {
         return dropLocation;
+    }
+
+    public void setVehicle(Vehicle vehicle) {   // REQUIRED
+        this.vehicle = vehicle;
+    }
+
+    public void setPickupLocation(Location pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public void setDropLocation(Location dropLocation) {
+        this.dropLocation = dropLocation;
     }
 }

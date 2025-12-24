@@ -26,13 +26,11 @@ public class User {
     public User() {
     }
 
-    /* ===== GETTERS / SETTERS (TEST REQUIRED) ===== */
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {   // REQUIRED BY TESTS
+    public void setId(Long id) {   // REQUIRED
         this.id = id;
     }
 
@@ -40,7 +38,7 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {   // REQUIRED BY TESTS
+    public void setName(String name) {   // REQUIRED
         this.name = name;
     }
 
@@ -48,11 +46,23 @@ public class User {
         return email;
     }
 
+    public void setEmail(String email) { // REQUIRED
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) { // REQUIRED
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
+    }
+
+    public void setRole(String role) { // REQUIRED
+        this.role = role;
     }
 }
