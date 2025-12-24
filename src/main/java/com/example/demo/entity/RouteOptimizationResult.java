@@ -38,7 +38,6 @@ public class RouteOptimizationResult {
         this.generatedAt = generatedAt;
     }
 
-    /* ===== CONSTRUCTOR USED BY SERVICE ===== */
     public RouteOptimizationResult(Shipment shipment,
                                    Double optimizedDistanceKm,
                                    Double estimatedFuelUsageL,
@@ -98,7 +97,6 @@ public class RouteOptimizationResult {
     }
 
     /* ===== GETTERS ===== */
-
     public Long getId() {
         return id;
     }

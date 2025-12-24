@@ -64,13 +64,12 @@ public class Location {
         }
     }
 
-    /* ===== GETTERS & SETTERS ===== */
-
+    /* ===== GETTERS / SETTERS ===== */
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {   // REQUIRED BY TEST CASES
+    public void setId(Long id) {   // REQUIRED BY TESTS
         this.id = id;
     }
 
