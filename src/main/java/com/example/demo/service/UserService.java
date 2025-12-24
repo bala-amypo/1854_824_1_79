@@ -4,9 +4,9 @@ import com.example.demo.entity.User;
 
 public interface UserService {
 
-    User registerUser(User user);
+    User register(User user);
 
-    User findById(Long id);
+    User registerUser(User user);     // REQUIRED BY AuthController
 
-    User findByEmail(String email);
+    User findByEmail(String email);   // REQUIRED BY AuthController
 }
