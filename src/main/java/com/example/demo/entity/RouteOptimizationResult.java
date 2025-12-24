@@ -26,7 +26,8 @@ public class RouteOptimizationResult {
     public RouteOptimizationResult() {
     }
 
-    public RouteOptimizationResult(Long id, Shipment shipment,
+    public RouteOptimizationResult(Long id,
+                                   Shipment shipment,
                                    Double optimizedDistanceKm,
                                    Double estimatedFuelUsageL,
                                    LocalDateTime generatedAt) {
@@ -37,6 +38,18 @@ public class RouteOptimizationResult {
         this.generatedAt = generatedAt;
     }
 
+    /* ===== CONSTRUCTOR USED BY SERVICE ===== */
+    public RouteOptimizationResult(Shipment shipment,
+                                   Double optimizedDistanceKm,
+                                   Double estimatedFuelUsageL,
+                                   LocalDateTime generatedAt) {
+        this.shipment = shipment;
+        this.optimizedDistanceKm = optimizedDistanceKm;
+        this.estimatedFuelUsageL = estimatedFuelUsageL;
+        this.generatedAt = generatedAt;
+    }
+
+    /* ===== BUILDER ===== */
     public static Builder builder() {
         return new Builder();
     }
@@ -74,8 +87,35 @@ public class RouteOptimizationResult {
         }
 
         public RouteOptimizationResult build() {
-            return new RouteOptimizationResult(id, shipment,
-                    optimizedDistanceKm, estimatedFuelUsageL, generatedAt);
+            return new RouteOptimizationResult(
+                    id,
+                    shipment,
+                    optimizedDistanceKm,
+                    estimatedFuelUsageL,
+                    generatedAt
+            );
         }
+    }
+
+    /* ===== GETTERS ===== */
+
+    public Long getId() {
+        return id;
+    }
+
+    public Shipment getShipment() {
+        return shipment;
+    }
+
+    public Double getOptimizedDistanceKm() {
+        return optimizedDistanceKm;
+    }
+
+    public Double getEstimatedFuelUsageL() {
+        return estimatedFuelUsageL;
+    }
+
+    public LocalDateTime getGeneratedAt() {
+        return generatedAt;
     }
 }

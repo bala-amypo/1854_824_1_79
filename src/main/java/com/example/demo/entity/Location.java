@@ -28,6 +28,7 @@ public class Location {
         this.longitude = longitude;
     }
 
+    /* ===== BUILDER ===== */
     public static Builder builder() {
         return new Builder();
     }
@@ -61,6 +62,16 @@ public class Location {
         public Location build() {
             return new Location(id, name, latitude, longitude);
         }
+    }
+
+    /* ===== GETTERS ===== */
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Double getLatitude() {

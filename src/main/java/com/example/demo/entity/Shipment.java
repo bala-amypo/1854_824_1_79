@@ -31,8 +31,12 @@ public class Shipment {
     public Shipment() {
     }
 
-    public Shipment(Long id, Vehicle vehicle, Location pickupLocation,
-                    Location dropLocation, Double weightKg, LocalDate scheduledDate) {
+    public Shipment(Long id,
+                    Vehicle vehicle,
+                    Location pickupLocation,
+                    Location dropLocation,
+                    Double weightKg,
+                    LocalDate scheduledDate) {
         this.id = id;
         this.vehicle = vehicle;
         this.pickupLocation = pickupLocation;
@@ -41,6 +45,7 @@ public class Shipment {
         this.scheduledDate = scheduledDate;
     }
 
+    /* ===== BUILDER ===== */
     public static Builder builder() {
         return new Builder();
     }
@@ -84,9 +89,33 @@ public class Shipment {
         }
 
         public Shipment build() {
-            return new Shipment(id, vehicle, pickupLocation,
-                    dropLocation, weightKg, scheduledDate);
+            return new Shipment(
+                    id,
+                    vehicle,
+                    pickupLocation,
+                    dropLocation,
+                    weightKg,
+                    scheduledDate
+            );
         }
+    }
+
+    /* ===== GETTERS & SETTERS ===== */
+
+    public Long getId() {
+        return id;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public Location getDropLocation() {
+        return dropLocation;
     }
 
     public Double getWeightKg() {
