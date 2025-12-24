@@ -1,8 +1,9 @@
 package com.example.demo.security;
 
-import java.util.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.Base64;
 
 @Component
 public class JwtUtil {
@@ -18,12 +19,23 @@ public class JwtUtil {
         this.expiration = expiration;
     }
 
+    // NOT a real JWT – Base64 encoded string
     public String generateToken(Long userId, String email, String role) {
-        String data = userId + ":" + email + ":" + role;
-        return Base64.getEncoder().encodeToString(data.getBytes());
+
+        long expiryTime = System.currentTimeMillis() + expiration;
+
+        String data = userId + ":" + email + ":" + role + ":" + expiryTime;
+
+        return Base64.getEncoder()
+                .encodeToString(data.getBytes());
     }
 
+    // Decodes token and returns raw data
     public String validateToken(String token) {
-        return new String(Base64.getDecoder().decode(token));
+
+        byte[] decodedBytes = Base64.getDecoder()
+                .decode(token);
+
+        return new String(decodedBytes);
     }
 }
