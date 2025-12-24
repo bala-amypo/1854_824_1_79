@@ -10,19 +10,20 @@ public class JwtUtil {
     private final String secret;
     private final long expiration;
 
-    public JwtUtil(@Value("${jwt.secret}") String secret,
-                   @Value("${jwt.expiration}") long expiration) {
+    public JwtUtil(
+            @Value("${jwt.secret:testsecretkey}") String secret,
+            @Value("${jwt.expiration:3600000}") long expiration) {
+
         this.secret = secret;
         this.expiration = expiration;
     }
 
     public String generateToken(Long userId, String email, String role) {
-        String tokenData = userId + ":" + email + ":" + role;
-        return Base64.getEncoder().encodeToString(tokenData.getBytes());
+        String data = userId + ":" + email + ":" + role;
+        return Base64.getEncoder().encodeToString(data.getBytes());
     }
 
     public String validateToken(String token) {
-        byte[] decoded = Base64.getDecoder().decode(token);
-        return new String(decoded);
+        return new String(Base64.getDecoder().decode(token));
     }
 }
