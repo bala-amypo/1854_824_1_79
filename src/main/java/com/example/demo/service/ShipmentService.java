@@ -8,4 +8,3 @@ public interface ShipmentService {
 
     Shipment getShipment(Long shipmentId);
 }
-

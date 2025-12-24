@@ -26,17 +26,24 @@ public class Vehicle {
 
     private Double fuelEfficiency;
 
+    // No-arg constructor (required by JPA)
     public Vehicle() {
     }
 
-    public Vehicle(User user, String vehicleNumber,
-                   Double capacityKg, Double fuelEfficiency) {
+    // Parameterized constructor
+    public Vehicle(
+            User user,
+            String vehicleNumber,
+            Double capacityKg,
+            Double fuelEfficiency) {
+
         this.user = user;
         this.vehicleNumber = vehicleNumber;
         this.capacityKg = capacityKg;
         this.fuelEfficiency = fuelEfficiency;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }
@@ -57,7 +64,24 @@ public class Vehicle {
         return fuelEfficiency;
     }
 
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setVehicleNumber(String vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public void setCapacityKg(Double capacityKg) {
+        this.capacityKg = capacityKg;
+    }
+
+    public void setFuelEfficiency(Double fuelEfficiency) {
+        this.fuelEfficiency = fuelEfficiency;
     }
 }

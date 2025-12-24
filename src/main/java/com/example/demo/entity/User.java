@@ -24,9 +24,11 @@ public class User {
 
     private String role;
 
+    // No-arg constructor (required by JPA)
     public User() {
     }
 
+    // Parameterized constructor
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
@@ -34,6 +36,7 @@ public class User {
         this.role = role;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }
@@ -54,6 +57,7 @@ public class User {
         return role;
     }
 
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }
