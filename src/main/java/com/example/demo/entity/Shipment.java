@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 @Entity
@@ -33,12 +34,18 @@ public class Shipment {
 
     private LocalDate scheduledDate;
 
+    // No-arg constructor (required by JPA)
     public Shipment() {
     }
 
-    public Shipment(Vehicle vehicle, Location pickupLocation,
-                    Location dropLocation, Double weightKg,
-                    LocalDate scheduledDate) {
+    // Parameterized constructor
+    public Shipment(
+            Vehicle vehicle,
+            Location pickupLocation,
+            Location dropLocation,
+            Double weightKg,
+            LocalDate scheduledDate) {
+
         this.vehicle = vehicle;
         this.pickupLocation = pickupLocation;
         this.dropLocation = dropLocation;
@@ -46,6 +53,7 @@ public class Shipment {
         this.scheduledDate = scheduledDate;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }
@@ -70,6 +78,11 @@ public class Shipment {
         return scheduledDate;
     }
 
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
@@ -80,5 +93,13 @@ public class Shipment {
 
     public void setDropLocation(Location dropLocation) {
         this.dropLocation = dropLocation;
+    }
+
+    public void setWeightKg(Double weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public void setScheduledDate(LocalDate scheduledDate) {
+        this.scheduledDate = scheduledDate;
     }
 }
