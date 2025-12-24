@@ -4,10 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 import java.time.LocalDate;
 
 @Entity
@@ -19,33 +17,23 @@ public class Shipment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
     @ManyToOne
-    @JoinColumn(name = "pickup_location_id")
     private Location pickupLocation;
 
     @ManyToOne
-    @JoinColumn(name = "drop_location_id")
     private Location dropLocation;
 
     private Double weightKg;
-
     private LocalDate scheduledDate;
 
-    // No-arg constructor (required by JPA)
     public Shipment() {
     }
 
-    // Parameterized constructor
-    public Shipment(
-            Vehicle vehicle,
-            Location pickupLocation,
-            Location dropLocation,
-            Double weightKg,
-            LocalDate scheduledDate) {
-
+    public Shipment(Long id, Vehicle vehicle, Location pickupLocation,
+                    Location dropLocation, Double weightKg, LocalDate scheduledDate) {
+        this.id = id;
         this.vehicle = vehicle;
         this.pickupLocation = pickupLocation;
         this.dropLocation = dropLocation;
@@ -53,21 +41,52 @@ public class Shipment {
         this.scheduledDate = scheduledDate;
     }
 
-    // Getters
-    public Long getId() {
-        return id;
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+    public static class Builder {
+        private Long id;
+        private Vehicle vehicle;
+        private Location pickupLocation;
+        private Location dropLocation;
+        private Double weightKg;
+        private LocalDate scheduledDate;
 
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
 
-    public Location getDropLocation() {
-        return dropLocation;
+        public Builder vehicle(Vehicle vehicle) {
+            this.vehicle = vehicle;
+            return this;
+        }
+
+        public Builder pickupLocation(Location pickupLocation) {
+            this.pickupLocation = pickupLocation;
+            return this;
+        }
+
+        public Builder dropLocation(Location dropLocation) {
+            this.dropLocation = dropLocation;
+            return this;
+        }
+
+        public Builder weightKg(Double weightKg) {
+            this.weightKg = weightKg;
+            return this;
+        }
+
+        public Builder scheduledDate(LocalDate scheduledDate) {
+            this.scheduledDate = scheduledDate;
+            return this;
+        }
+
+        public Shipment build() {
+            return new Shipment(id, vehicle, pickupLocation,
+                    dropLocation, weightKg, scheduledDate);
+        }
     }
 
     public Double getWeightKg() {
@@ -76,11 +95,6 @@ public class Shipment {
 
     public LocalDate getScheduledDate() {
         return scheduledDate;
-    }
-
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setVehicle(Vehicle vehicle) {
@@ -93,13 +107,5 @@ public class Shipment {
 
     public void setDropLocation(Location dropLocation) {
         this.dropLocation = dropLocation;
-    }
-
-    public void setWeightKg(Double weightKg) {
-        this.weightKg = weightKg;
-    }
-
-    public void setScheduledDate(LocalDate scheduledDate) {
-        this.scheduledDate = scheduledDate;
     }
 }

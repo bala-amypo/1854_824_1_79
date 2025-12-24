@@ -4,10 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,71 +17,65 @@ public class RouteOptimizationResult {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "shipment_id")
     private Shipment shipment;
 
     private Double optimizedDistanceKm;
-
     private Double estimatedFuelUsageL;
-
     private LocalDateTime generatedAt;
 
-    // No-arg constructor (required by JPA)
     public RouteOptimizationResult() {
     }
 
-    // Parameterized constructor
-    public RouteOptimizationResult(
-            Shipment shipment,
-            Double optimizedDistanceKm,
-            Double estimatedFuelUsageL,
-            LocalDateTime generatedAt) {
-
-        this.shipment = shipment;
-        this.optimizedDistanceKm = optimizedDistanceKm;
-        this.estimatedFuelUsageL = estimatedFuelUsageL;
-        this.generatedAt = generatedAt;
-    }
-
-    // Getters
-    public Long getId() {
-        return id;
-    }
-
-    public Shipment getShipment() {
-        return shipment;
-    }
-
-    public Double getOptimizedDistanceKm() {
-        return optimizedDistanceKm;
-    }
-
-    public Double getEstimatedFuelUsageL() {
-        return estimatedFuelUsageL;
-    }
-
-    public LocalDateTime getGeneratedAt() {
-        return generatedAt;
-    }
-
-    // Setters
-    public void setId(Long id) {
+    public RouteOptimizationResult(Long id, Shipment shipment,
+                                   Double optimizedDistanceKm,
+                                   Double estimatedFuelUsageL,
+                                   LocalDateTime generatedAt) {
         this.id = id;
-    }
-
-    public void setShipment(Shipment shipment) {
         this.shipment = shipment;
-    }
-
-    public void setOptimizedDistanceKm(Double optimizedDistanceKm) {
         this.optimizedDistanceKm = optimizedDistanceKm;
-    }
-
-    public void setEstimatedFuelUsageL(Double estimatedFuelUsageL) {
         this.estimatedFuelUsageL = estimatedFuelUsageL;
+        this.generatedAt = generatedAt;
     }
 
-    public void setGeneratedAt(LocalDateTime generatedAt) {
-        this.generatedAt = generatedAt;
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private Shipment shipment;
+        private Double optimizedDistanceKm;
+        private Double estimatedFuelUsageL;
+        private LocalDateTime generatedAt;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder shipment(Shipment shipment) {
+            this.shipment = shipment;
+            return this;
+        }
+
+        public Builder optimizedDistanceKm(Double optimizedDistanceKm) {
+            this.optimizedDistanceKm = optimizedDistanceKm;
+            return this;
+        }
+
+        public Builder estimatedFuelUsageL(Double estimatedFuelUsageL) {
+            this.estimatedFuelUsageL = estimatedFuelUsageL;
+            return this;
+        }
+
+        public Builder generatedAt(LocalDateTime generatedAt) {
+            this.generatedAt = generatedAt;
+            return this;
+        }
+
+        public RouteOptimizationResult build() {
+            return new RouteOptimizationResult(id, shipment,
+                    optimizedDistanceKm, estimatedFuelUsageL, generatedAt);
+        }
     }
 }

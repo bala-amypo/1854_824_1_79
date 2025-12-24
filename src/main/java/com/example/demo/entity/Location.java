@@ -15,29 +15,52 @@ public class Location {
     private Long id;
 
     private String name;
-
     private Double latitude;
-
     private Double longitude;
 
-    // No-arg constructor (required by JPA)
     public Location() {
     }
 
-    // Parameterized constructor
-    public Location(String name, Double latitude, Double longitude) {
+    public Location(Long id, String name, Double latitude, Double longitude) {
+        this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    // Getters
-    public Long getId() {
-        return id;
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public String getName() {
-        return name;
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Double latitude;
+        private Double longitude;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder latitude(Double latitude) {
+            this.latitude = latitude;
+            return this;
+        }
+
+        public Builder longitude(Double longitude) {
+            this.longitude = longitude;
+            return this;
+        }
+
+        public Location build() {
+            return new Location(id, name, latitude, longitude);
+        }
     }
 
     public Double getLatitude() {
@@ -46,22 +69,5 @@ public class Location {
 
     public Double getLongitude() {
         return longitude;
-    }
-
-    // Setters (recommended for JPA)
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 }
