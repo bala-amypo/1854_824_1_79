@@ -23,46 +23,25 @@ public class RouteOptimizationResult {
     private Double estimatedFuelUsageL;
     private LocalDateTime generatedAt;
 
-    public RouteOptimizationResult() {
-    }
+    public RouteOptimizationResult() {}
 
-    public static Builder builder() {   // REQUIRED
+    /* ===== BUILDER ===== */
+    public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
-        private Shipment shipment;
-        private Double optimizedDistanceKm;
-        private Double estimatedFuelUsageL;
-        private LocalDateTime generatedAt;
+        private final RouteOptimizationResult r = new RouteOptimizationResult();
 
-        public Builder shipment(Shipment shipment) {
-            this.shipment = shipment;
-            return this;
-        }
+        public Builder id(Long id) { r.id = id; return this; }
+        public Builder shipment(Shipment s) { r.shipment = s; return this; }
+        public Builder optimizedDistanceKm(Double d) { r.optimizedDistanceKm = d; return this; }
+        public Builder estimatedFuelUsageL(Double f) { r.estimatedFuelUsageL = f; return this; }
+        public Builder generatedAt(LocalDateTime t) { r.generatedAt = t; return this; }
 
-        public Builder optimizedDistanceKm(Double optimizedDistanceKm) {
-            this.optimizedDistanceKm = optimizedDistanceKm;
-            return this;
-        }
-
-        public Builder estimatedFuelUsageL(Double estimatedFuelUsageL) {
-            this.estimatedFuelUsageL = estimatedFuelUsageL;
-            return this;
-        }
-
-        public Builder generatedAt(LocalDateTime generatedAt) {
-            this.generatedAt = generatedAt;
-            return this;
-        }
-
-        public RouteOptimizationResult build() {
-            RouteOptimizationResult r = new RouteOptimizationResult();
-            r.shipment = shipment;
-            r.optimizedDistanceKm = optimizedDistanceKm;
-            r.estimatedFuelUsageL = estimatedFuelUsageL;
-            r.generatedAt = generatedAt;
-            return r;
-        }
+        public RouteOptimizationResult build() { return r; }
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 }

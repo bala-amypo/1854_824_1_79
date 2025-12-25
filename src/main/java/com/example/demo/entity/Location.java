@@ -18,22 +18,46 @@ public class Location {
     private Double latitude;
     private Double longitude;
 
-    public Location() {
+    public Location() {}
+
+    /* ===== BUILDER ===== */
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public Long getId() {
-        return id;
+    public static class Builder {
+        private final Location l = new Location();
+
+        public Builder id(Long id) {
+            l.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
+            l.name = name;
+            return this;
+        }
+
+        public Builder latitude(Double latitude) {
+            l.latitude = latitude;
+            return this;
+        }
+
+        public Builder longitude(Double longitude) {
+            l.longitude = longitude;
+            return this;
+        }
+
+        public Location build() {
+            return l;
+        }
     }
 
-    public void setId(Long id) {   // REQUIRED BY TESTS
-        this.id = id;
-    }
+    /* ===== GETTERS / SETTERS ===== */
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
+    public String getName() { return name; }
+    public Double getLatitude() { return latitude; }
+    public Double getLongitude() { return longitude; }
 }

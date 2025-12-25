@@ -28,42 +28,39 @@ public class Shipment {
     private Double weightKg;
     private LocalDate scheduledDate;
 
-    public Shipment() {
+    public Shipment() {}
+
+    /* ===== BUILDER ===== */
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public Long getId() {
-        return id;
+    public static class Builder {
+        private final Shipment s = new Shipment();
+
+        public Builder id(Long id) { s.id = id; return this; }
+        public Builder vehicle(Vehicle vehicle) { s.vehicle = vehicle; return this; }
+        public Builder pickupLocation(Location l) { s.pickupLocation = l; return this; }
+        public Builder dropLocation(Location l) { s.dropLocation = l; return this; }
+        public Builder weightKg(Double w) { s.weightKg = w; return this; }
+        public Builder scheduledDate(LocalDate d) { s.scheduledDate = d; return this; }
+
+        public Shipment build() { return s; }
     }
 
-    public Double getWeightKg() {   // REQUIRED
-        return weightKg;
-    }
+    /* ===== GETTERS / SETTERS ===== */
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public LocalDate getScheduledDate() { // REQUIRED
-        return scheduledDate;
-    }
+    public Vehicle getVehicle() { return vehicle; }
+    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+    public Location getPickupLocation() { return pickupLocation; }
+    public void setPickupLocation(Location l) { this.pickupLocation = l; }
 
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
+    public Location getDropLocation() { return dropLocation; }
+    public void setDropLocation(Location l) { this.dropLocation = l; }
 
-    public Location getDropLocation() {
-        return dropLocation;
-    }
-
-    public void setVehicle(Vehicle vehicle) {   // REQUIRED
-        this.vehicle = vehicle;
-    }
-
-    public void setPickupLocation(Location pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public void setDropLocation(Location dropLocation) {
-        this.dropLocation = dropLocation;
-    }
+    public Double getWeightKg() { return weightKg; }
+    public LocalDate getScheduledDate() { return scheduledDate; }
 }
