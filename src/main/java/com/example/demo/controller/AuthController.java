@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
 public class AuthController {
 
     private final UserService userService;
@@ -19,20 +16,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.registerUser(user);
+    public String register(@RequestBody User user) {
+        userService.registerUser(user);
+        return "User registered successfully";
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
-
-        User user = userService.findByEmail(request.getEmail());
-
-        if (user == null ||
-            !user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+    public String login(@RequestBody User user) {
+        User u = userService.findByEmail(user.getEmail());
+        if (u != null) {
+            return "Login successful";
         }
-
-        return "Login successful";
+        return "Invalid credentials";
     }
 }

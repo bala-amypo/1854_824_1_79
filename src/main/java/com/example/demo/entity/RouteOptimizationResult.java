@@ -33,15 +33,45 @@ public class RouteOptimizationResult {
     public static class Builder {
         private final RouteOptimizationResult r = new RouteOptimizationResult();
 
-        public Builder id(Long id) { r.id = id; return this; }
-        public Builder shipment(Shipment s) { r.shipment = s; return this; }
-        public Builder optimizedDistanceKm(Double d) { r.optimizedDistanceKm = d; return this; }
-        public Builder estimatedFuelUsageL(Double f) { r.estimatedFuelUsageL = f; return this; }
-        public Builder generatedAt(LocalDateTime t) { r.generatedAt = t; return this; }
+        public Builder shipment(Shipment s) {
+            r.shipment = s;
+            return this;
+        }
 
-        public RouteOptimizationResult build() { return r; }
+        public Builder optimizedDistanceKm(Double d) {
+            r.optimizedDistanceKm = d;
+            return this;
+        }
+
+        public Builder estimatedFuelUsageL(Double f) {
+            r.estimatedFuelUsageL = f;
+            return this;
+        }
+
+        public Builder generatedAt(LocalDateTime t) {
+            r.generatedAt = t;
+            return this;
+        }
+
+        public RouteOptimizationResult build() {
+            return r;
+        }
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    /* ===== GETTERS REQUIRED BY TESTS ===== */
+    public Long getId() {
+        return id;
+    }
+
+    public Double getOptimizedDistanceKm() {
+        return optimizedDistanceKm;
+    }
+
+    public Double getEstimatedFuelUsageL() {
+        return estimatedFuelUsageL;
+    }
+
+    public LocalDateTime getGeneratedAt() {
+        return generatedAt;
+    }
 }

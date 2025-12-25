@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    // 🔥 REQUIRED BY TESTS
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -28,7 +30,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElse(null);
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.orElse(null);
+    }
+
+    // 🔥 REQUIRED BY TESTS
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }
