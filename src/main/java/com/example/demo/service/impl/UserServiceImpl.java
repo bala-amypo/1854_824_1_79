@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import java.util.Optional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,8 +12,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    // 🔥 REQUIRED BY TESTS
+    // REQUIRED BY APP
     public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // 🔥 REQUIRED BY TEST CASES
+    public UserServiceImpl(UserRepository userRepository,
+                           BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
     }
 
@@ -30,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        return user.orElse(null);
+        Optional<User> u = userRepository.findByEmail(email);
+        return u.orElse(null);
     }
 
     // 🔥 REQUIRED BY TESTS
