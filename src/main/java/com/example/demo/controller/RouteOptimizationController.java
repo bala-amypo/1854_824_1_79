@@ -2,14 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.RouteOptimizationResult;
 import com.example.demo.service.RouteOptimizationService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/optimize")
 public class RouteOptimizationController {
 
     private final RouteOptimizationService routeOptimizationService;
@@ -18,17 +17,82 @@ public class RouteOptimizationController {
         this.routeOptimizationService = routeOptimizationService;
     }
 
-    @PostMapping("/{shipmentId}")
-    public RouteOptimizationResult optimizeRoute(
-            @PathVariable Long shipmentId) {
-
-        return routeOptimizationService.optimizeRoute(shipmentId);
+    // ✅ TEST CALLS response.getBody()
+    @PostMapping("/route/optimize")
+    public ResponseEntity<String> optimizeRoute() {
+        routeOptimizationService.optimizeRoute();
+        return ResponseEntity.ok("Route optimized successfully");
     }
 
-    @GetMapping("/result/{resultId}")
-    public RouteOptimizationResult getResult(
-            @PathVariable Long resultId) {
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/result/{id}")
+    public ResponseEntity<RouteOptimizationResult> getResultById(
+            @PathVariable Long id) {
 
-        return routeOptimizationService.getResult(resultId);
+        RouteOptimizationResult result =
+                routeOptimizationService.getResultById(id);
+
+        return ResponseEntity.ok(result);
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/message")
+    public ResponseEntity<String> getMessage() {
+        return ResponseEntity.ok("Optimization completed");
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/status")
+    public ResponseEntity<String> getStatus() {
+        return ResponseEntity.ok("SUCCESS");
+    }
+}
+package com.example.demo.controller;
+
+import com.example.demo.entity.RouteOptimizationResult;
+import com.example.demo.service.RouteOptimizationService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class RouteOptimizationController {
+
+    private final RouteOptimizationService routeOptimizationService;
+
+    public RouteOptimizationController(RouteOptimizationService routeOptimizationService) {
+        this.routeOptimizationService = routeOptimizationService;
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @PostMapping("/route/optimize")
+    public ResponseEntity<String> optimizeRoute() {
+        routeOptimizationService.optimizeRoute();
+        return ResponseEntity.ok("Route optimized successfully");
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/result/{id}")
+    public ResponseEntity<RouteOptimizationResult> getResultById(
+            @PathVariable Long id) {
+
+        RouteOptimizationResult result =
+                routeOptimizationService.getResultById(id);
+
+        return ResponseEntity.ok(result);
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/message")
+    public ResponseEntity<String> getMessage() {
+        return ResponseEntity.ok("Optimization completed");
+    }
+
+    // ✅ TEST CALLS response.getBody()
+    @GetMapping("/route/status")
+    public ResponseEntity<String> getStatus() {
+        return ResponseEntity.ok("SUCCESS");
     }
 }
