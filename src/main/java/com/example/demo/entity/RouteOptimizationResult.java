@@ -33,6 +33,11 @@ public class RouteOptimizationResult {
     public static class Builder {
         private final RouteOptimizationResult r = new RouteOptimizationResult();
 
+        public Builder id(Long id) {
+            r.id = id;
+            return this;
+        }
+
         public Builder shipment(Shipment s) {
             r.shipment = s;
             return this;
@@ -58,9 +63,13 @@ public class RouteOptimizationResult {
         }
     }
 
-    /* ===== GETTERS REQUIRED BY TESTS ===== */
+    /* ===== REQUIRED GETTERS & SETTERS ===== */
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getOptimizedDistanceKm() {
