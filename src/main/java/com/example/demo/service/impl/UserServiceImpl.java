@@ -11,13 +11,21 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    // ✅ Create encoder directly (NO bean required)
-    private final BCryptPasswordEncoder passwordEncoder =
-            new BCryptPasswordEncoder();
-
+    // ✅ Constructor used by SPRING (1 param)
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
+    }
+
+    // ✅ Constructor REQUIRED BY TEST CASE (2 params)
+    public UserServiceImpl(
+            UserRepository userRepository,
+            BCryptPasswordEncoder passwordEncoder) {
+
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -36,7 +44,7 @@ public class UserServiceImpl implements UserService {
                         new ResourceNotFoundException("User not found"));
     }
 
-    // Used by tests
+    // Used directly in tests
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() ->
