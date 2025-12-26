@@ -3,8 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -12,16 +15,27 @@ public class AuthController {
 
     private final UserService userService;
     private final JwtUtil jwtUtil;
-    private final PasswordEncoder encoder;
 
-    public AuthController(UserService u, JwtUtil j, PasswordEncoder e) {
-        this.userService = u;
-        this.jwtUtil = j;
-        this.encoder = e;
+    // ✅ Constructor injection (Spring can now resolve beans)
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
+    /**
+     * Register user and return JWT token
+     */
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public ResponseEntity<String> register(@RequestBody User user) {
+
+        User savedUser = userService.register(user);
+
+        String token = jwtUtil.generateToken(
+                savedUser.getId(),
+                savedUser.getEmail(),
+                savedUser.getRole()
+        );
+
+        return ResponseEntity.ok(token);
     }
 }
