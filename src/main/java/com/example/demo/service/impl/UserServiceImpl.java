@@ -11,16 +11,15 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(
-            UserRepository userRepository,
-            BCryptPasswordEncoder passwordEncoder) {
+    // ✅ Create encoder directly (NO bean required)
+    private final BCryptPasswordEncoder passwordEncoder =
+            new BCryptPasswordEncoder();
+
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    // ✅ MUST EXACTLY MATCH INTERFACE
     @Override
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
