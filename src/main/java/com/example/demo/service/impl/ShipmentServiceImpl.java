@@ -27,12 +27,14 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public Shipment createShipment(Long vehicleId, Shipment shipment) {
+
         if (shipment.getScheduledDate().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Scheduled date is in the past");
         }
 
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Vehicle not found"));
 
         if (shipment.getWeightKg() > vehicle.getCapacityKg()) {
             throw new IllegalArgumentException("Weight exceeds capacity");
@@ -40,6 +42,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
         Location pickup = locationRepository.findById(
                 shipment.getPickupLocation().getId()).orElseThrow();
+
         Location drop = locationRepository.findById(
                 shipment.getDropLocation().getId()).orElseThrow();
 
@@ -53,6 +56,7 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public Shipment getShipment(Long id) {
         return shipmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Shipment not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Shipment not found"));
     }
 }

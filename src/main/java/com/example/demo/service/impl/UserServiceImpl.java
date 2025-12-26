@@ -9,16 +9,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder encoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.encoder = encoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User register(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getRole() == null) {
             user.setRole("USER");
         }
@@ -28,11 +30,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
     }
 
+    // Used internally in tests
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
     }
 }
