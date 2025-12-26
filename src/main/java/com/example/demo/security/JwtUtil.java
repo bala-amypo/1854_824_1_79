@@ -7,14 +7,26 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
+import org.springframework.stereotype.Component;
+
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+@Component   // ✅ MAKES THIS A SPRING BEAN
 public class JwtUtil {
 
     private final SecretKey key;
     private final long expirationMs;
 
+    // ✅ DEFAULT CONSTRUCTOR FOR SPRING
+    public JwtUtil() {
+        this.key = Keys.hmacShaKeyFor(
+                "testsecretkeytestsecretkeytestsecretkey".getBytes()
+        );
+        this.expirationMs = 3600000;
+    }
+
+    // ✅ CONSTRUCTOR USED BY TESTS
     public JwtUtil(String secret, long expirationMs) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.expirationMs = expirationMs;
