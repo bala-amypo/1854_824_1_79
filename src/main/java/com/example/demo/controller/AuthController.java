@@ -8,26 +8,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder encoder;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(UserService u, JwtUtil j, PasswordEncoder e) {
+        this.userService = u;
+        this.jwtUtil = j;
+        this.encoder = e;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
-        userService.registerUser(user);
-        return ResponseEntity.ok("User registered successfully");
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        User u = userService.findByEmail(user.getEmail());
-        if (u != null) {
-            return ResponseEntity.ok("Login successful");
-        }
-        return ResponseEntity.ok("Invalid credentials");
+    public User register(@RequestBody User user) {
+        return userService.register(user);
     }
 }
