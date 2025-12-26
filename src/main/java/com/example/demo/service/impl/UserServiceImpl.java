@@ -4,24 +4,21 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-@Service   
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder encoder;
 
-    public UserServiceImpl(UserRepository repo, PasswordEncoder encoder) {
-        this.userRepository = repo;
-        this.passwordEncoder = encoder;
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
     }
 
     @Override
     public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
         if (user.getRole() == null) {
             user.setRole("USER");
         }
@@ -34,7 +31,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
-    @Override
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
