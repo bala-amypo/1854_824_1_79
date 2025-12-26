@@ -13,21 +13,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(
+    public UserServiceImpl(){
+        
+    }
             UserRepository userRepository,
-            BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    //         BCryptPasswordEncoder passwordEncoder) {
+    //     this.userRepository = userRepository;
+    //     this.passwordEncoder = passwordEncoder;
+    // }
 
-    @Override
-    public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if (user.getRole() == null) {
-            user.setRole("USER");
-        }
-        return userRepository.save(user);
-    }
+    // @Override
+    // public User register(User user) {
+    //     user.setPassword(passwordEncoder.encode(user.getPassword()));
+    //     if (user.getRole() == null) {
+    //         user.setRole("USER");
+    //     }
+    //     return userRepository.save(user);
+    // }
 
     @Override
     public User findByEmail(String email) {
