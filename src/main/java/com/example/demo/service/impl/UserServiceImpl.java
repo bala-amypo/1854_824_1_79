@@ -5,21 +5,19 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // ✅ Constructor used by SPRING (1 param)
+    // Constructor used by CONTROLLERS
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    // ✅ Constructor REQUIRED BY TEST CASE (2 params)
+    // Constructor used by TEST CASES
     public UserServiceImpl(
             UserRepository userRepository,
             BCryptPasswordEncoder passwordEncoder) {
@@ -44,7 +42,6 @@ public class UserServiceImpl implements UserService {
                         new ResourceNotFoundException("User not found"));
     }
 
-    // Used directly in tests
     public User findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() ->
