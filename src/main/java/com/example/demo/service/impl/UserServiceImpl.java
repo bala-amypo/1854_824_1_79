@@ -1,13 +1,11 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.User;
+import com.example.demo.entity.User;   // ✅ CORRECT PACKAGE
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,7 +13,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // ✅ REQUIRED constructor for Spring
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            PasswordEncoder passwordEncoder) {
@@ -29,8 +26,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    // ✅ MUST match interface EXACTLY
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 }
