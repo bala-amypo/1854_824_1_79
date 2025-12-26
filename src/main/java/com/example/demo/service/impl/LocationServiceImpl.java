@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Location;
 import com.example.demo.repository.LocationRepository;
 import com.example.demo.service.LocationService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 public class LocationServiceImpl implements LocationService {

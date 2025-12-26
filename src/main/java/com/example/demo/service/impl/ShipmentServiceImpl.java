@@ -8,7 +8,9 @@ import com.example.demo.repository.LocationRepository;
 import com.example.demo.repository.ShipmentRepository;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.ShipmentService;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+
 
 public class ShipmentServiceImpl implements ShipmentService {
 
