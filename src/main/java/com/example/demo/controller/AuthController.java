@@ -16,7 +16,6 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    
     public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -25,12 +24,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
 
-        User savedUser = userService.register(user);
+        User saved = userService.register(user);
 
         String token = jwtUtil.generateToken(
-                savedUser.getId(),
-                savedUser.getEmail(),
-                savedUser.getRole()
+                saved.getId(),
+                saved.getEmail(),
+                saved.getRole()
         );
 
         return ResponseEntity.ok(token);
