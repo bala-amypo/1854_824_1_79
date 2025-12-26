@@ -16,9 +16,13 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
+    // ✅ Initialize jwtUtil INSIDE constructor
     public AuthController(UserService userService) {
         this.userService = userService;
-        this.jwtUtil = jwtUtil;
+        this.jwtUtil = new JwtUtil(
+                "testsecretkeytestsecretkeytestsecretkey",
+                3600000
+        );
     }
 
     @PostMapping("/register")
