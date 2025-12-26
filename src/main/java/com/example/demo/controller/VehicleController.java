@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Vehicle;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
+import com.example.demo.service.impl.VehicleServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +20,13 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
+    // ✅ Manually create service using repositories
+    public VehicleController(
+            VehicleRepository vehicleRepository,
+            UserRepository userRepository) {
+
+        this.vehicleService =
+                new VehicleServiceImpl(vehicleRepository, userRepository);
     }
 
     @PostMapping("/{userId}")
