@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Location;
+import com.example.demo.repository.LocationRepository;
 import com.example.demo.service.LocationService;
+import com.example.demo.service.impl.LocationServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,19 +16,20 @@ import java.util.List;
 @RequestMapping("/locations")
 public class LocationController {
 
-    private final LocationService service;
+    private final LocationService locationService;
 
-    public LocationController(LocationService service) {
-        this.service = service;
+    // ✅ Manually create service (NO Spring bean needed)
+    public LocationController(LocationRepository locationRepository) {
+        this.locationService = new LocationServiceImpl(locationRepository);
     }
 
     @PostMapping
     public Location create(@RequestBody Location location) {
-        return service.createLocation(location);
+        return locationService.createLocation(location);
     }
 
     @GetMapping
     public List<Location> getAll() {
-        return service.getAllLocations();
+        return locationService.getAllLocations();
     }
 }
