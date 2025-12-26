@@ -16,15 +16,12 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    // ✅ Constructor injection (Spring can now resolve beans)
+    
     public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
 
-    /**
-     * Register user and return JWT token
-     */
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
 
