@@ -1,41 +1,40 @@
 package com.example.demo.security;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
-import java.util.Base64;
+import javax.crypto.SecretKey;
+import java.util.Date;
 
-@Component
 public class JwtUtil {
 
-    private final String secret;
-    private final long expiration;
+    private final SecretKey key;
+    private final long expirationMs;
 
-    public JwtUtil(
-            @Value("${jwt.secret:testsecretkey}") String secret,
-            @Value("${jwt.expiration:3600000}") long expiration) {
-
-        this.secret = secret;
-        this.expiration = expiration;
+    public JwtUtil(String secret, long expirationMs) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.expirationMs = expirationMs;
     }
 
-    // NOT a real JWT – Base64 encoded string
     public String generateToken(Long userId, String email, String role) {
-
-        long expiryTime = System.currentTimeMillis() + expiration;
-
-        String data = userId + ":" + email + ":" + role + ":" + expiryTime;
-
-        return Base64.getEncoder()
-                .encodeToString(data.getBytes());
+        return Jwts.builder()
+                .claim("userId", userId)
+                .claim("email", email)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    // Decodes token and returns raw data
-    public String validateToken(String token) {
-
-        byte[] decodedBytes = Base64.getDecoder()
-                .decode(token);
-
-        return new String(decodedBytes);
+    public Jws<Claims> validateToken(String token) throws JwtException {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
     }
 }
