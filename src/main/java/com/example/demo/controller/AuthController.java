@@ -18,7 +18,6 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    // ✅ Manually create UserServiceImpl
     public AuthController(UserRepository userRepository) {
         this.userService = new UserServiceImpl(userRepository);
         this.jwtUtil = new JwtUtil(
