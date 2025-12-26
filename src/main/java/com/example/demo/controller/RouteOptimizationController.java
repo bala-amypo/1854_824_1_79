@@ -7,20 +7,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/optimize")
 public class RouteOptimizationController {
 
-    private final RouteOptimizationService routeOptimizationService;
+    private final RouteOptimizationService service;
 
-    public RouteOptimizationController(
-            RouteOptimizationService routeOptimizationService) {
-        this.routeOptimizationService = routeOptimizationService;
+    public RouteOptimizationController(RouteOptimizationService service) {
+        this.service = service;
     }
 
-    @PostMapping("/route/optimize/{shipmentId}")
-    public ResponseEntity<String> optimizeRoute(
-            @PathVariable Long shipmentId) {
+    @PostMapping("/{shipmentId}")
+    public RouteOptimizationResult optimize(@PathVariable Long shipmentId) {
+        return service.optimizeRoute(shipmentId);
+    }
 
-        routeOptimizationService.optimizeRoute(shipmentId);
-        return ResponseEntity.ok("Route optimized successfully");
+    @GetMapping("/result/{resultId}")
+    public RouteOptimizationResult getResult(@PathVariable Long resultId) {
+        return service.getResult(resultId);
     }
 }

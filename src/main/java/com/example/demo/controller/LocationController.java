@@ -14,19 +14,19 @@ import java.util.List;
 @RequestMapping("/locations")
 public class LocationController {
 
-    private final LocationService locationService;
+    private final LocationService service;
 
-    public LocationController(LocationService locationService) {
-        this.locationService = locationService;
+    public LocationController(LocationService service) {
+        this.service = service;
     }
 
     @PostMapping
-    public Location createLocation(@RequestBody Location location) {
-        return locationService.createLocation(location);
+    public Location create(@RequestBody Location location) {
+        return service.createLocation(location);
     }
 
     @GetMapping
-    public List<Location> getAllLocations() {
-        return locationService.getAllLocations();
+    public List<Location> getAll() {
+        return service.getAllLocations();
     }
 }
