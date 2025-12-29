@@ -20,7 +20,6 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
-    // ✅ Manually create service using repositories
     public VehicleController(
             VehicleRepository vehicleRepository,
             UserRepository userRepository) {

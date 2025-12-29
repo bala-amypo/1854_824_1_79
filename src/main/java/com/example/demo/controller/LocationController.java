@@ -18,7 +18,6 @@ public class LocationController {
 
     private final LocationService locationService;
 
-    // ✅ Manually create service (NO Spring bean needed)
     public LocationController(LocationRepository locationRepository) {
         this.locationService = new LocationServiceImpl(locationRepository);
     }
