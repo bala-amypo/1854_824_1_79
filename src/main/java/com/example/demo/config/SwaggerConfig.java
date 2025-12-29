@@ -71,7 +71,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
 
-        // 🔐 JWT Security Scheme
+    
         SecurityScheme securityScheme = new SecurityScheme()
                 .name("Authorization")
                 .type(SecurityScheme.Type.HTTP)
@@ -81,7 +81,7 @@ public class SwaggerConfig {
         SecurityRequirement securityRequirement =
                 new SecurityRequirement().addList("Authorization");
 
-        // 🌐 Server / Host link
+        
         Server remoteServer = new Server()
                 .url("https://9058.32procr.amypo.ai/")
                 .description("Remote Hosted Server");
